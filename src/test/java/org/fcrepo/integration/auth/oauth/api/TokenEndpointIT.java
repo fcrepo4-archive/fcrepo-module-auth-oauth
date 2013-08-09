@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fcrepo.auth.oauth.integration.api;
+package org.fcrepo.integration.auth.oauth.api;
 
 import static java.util.regex.Pattern.compile;
 import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 import static javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -30,6 +28,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.util.EntityUtils;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class TokenEndpointIT extends AbstractOAuthResourceIT {
@@ -50,8 +49,9 @@ public class TokenEndpointIT extends AbstractOAuthResourceIT {
         final HttpResponse tokenResponse = client.execute(post);
         logger.debug("Got a token response: \n{}", EntityUtils
                 .toString(tokenResponse.getEntity()));
-        assertEquals("Couldn't retrieve a token from token endpoint!", 200,
-                tokenResponse.getStatusLine().getStatusCode());
+        Assert.assertEquals("Couldn't retrieve a token from token endpoint!",
+                            200,
+                            tokenResponse.getStatusLine().getStatusCode());
 
     }
 
@@ -61,9 +61,10 @@ public class TokenEndpointIT extends AbstractOAuthResourceIT {
         logger.debug("Trying to write an object to authenticated area without authentication via token...");
         final HttpResponse failure =
                 client.execute(postObjMethod("authenticated/testUseToken"));
-        assertEquals(
+        Assert.assertEquals(
                 "Was able to write to an authenticated area when I shouldn't be able to",
-                SC_UNAUTHORIZED, failure.getStatusLine().getStatusCode());
+                SC_UNAUTHORIZED,
+                failure.getStatusLine().getStatusCode());
         logger.debug("Failed as expected.");
         logger.debug("Now trying with authentication via token...");
         final HttpPost post =
@@ -76,11 +77,12 @@ public class TokenEndpointIT extends AbstractOAuthResourceIT {
         final String tokenResponseString =
                 EntityUtils.toString(tokenResponse.getEntity());
         logger.debug("Got a token response: \n{}", tokenResponseString);
-        assertEquals("Couldn't retrieve a token from token endpoint!", 200,
-                tokenResponse.getStatusLine().getStatusCode());
+        Assert.assertEquals("Couldn't retrieve a token from token endpoint!",
+                            200,
+                            tokenResponse.getStatusLine().getStatusCode());
 
         final Matcher tokenMatcher = tokenPattern.matcher(tokenResponseString);
-        assertTrue("Couldn't find token in token response!", tokenMatcher
+        Assert.assertTrue("Couldn't find token in token response!", tokenMatcher
                 .find());
         final String token = tokenMatcher.group(1);
         logger.debug("Found token: {}", token);
@@ -88,7 +90,8 @@ public class TokenEndpointIT extends AbstractOAuthResourceIT {
                 postObjMethod("authenticated/testUseToken?access_token=" +
                         token);
         final HttpResponse success = client.execute(successMethod);
-        assertEquals("Failed to create object even with authentication!", 201,
-                success.getStatusLine().getStatusCode());
+        Assert.assertEquals("Failed to create object even with authentication!",
+                            201,
+                            success.getStatusLine().getStatusCode());
     }
 }

@@ -13,20 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fcrepo.auth.oauth.integration.api.bind;
+package org.fcrepo.integration.auth.oauth.api.bind;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElement;
 
-@XmlRootElement(namespace = "http://java.sun.com/xml/ns/javaee",
-        name = "context-param")
-public class ContextParam extends Param {
+public abstract class Describable {
 
-    public ContextParam() {
-        super();
-    }
+    @XmlElement(namespace = "http://java.sun.com/xml/ns/javaee",
+            name = "description")
+    String description;
 
-    public ContextParam(String name, String value) {
-        super(name, value);
+    public String getDescription() {
+        return description;
     }
 
 }

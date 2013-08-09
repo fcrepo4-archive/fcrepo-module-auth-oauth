@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fcrepo.auth.oauth.integration.api;
+package org.fcrepo.integration.auth.oauth.api;
 
 import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.parseInt;

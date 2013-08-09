@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fcrepo.auth.oauth.integration.api;
+package org.fcrepo.integration.auth.oauth.api;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static org.apache.http.client.params.ClientPNames.HANDLE_REDIRECTS;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 import java.net.URI;
@@ -29,6 +27,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.util.EntityUtils;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class AuthzEndpointIT extends AbstractOAuthResourceIT {
@@ -46,7 +45,7 @@ public class AuthzEndpointIT extends AbstractOAuthResourceIT {
                 response.getFirstHeader("Location").getValue();
         final String authCode =
                 URI.create(redirectHeader).getQuery().split("&")[0].split("=")[1];
-        assertNotNull("Didn't find authorization code!", authCode);
+        Assert.assertNotNull("Didn't find authorization code!", authCode);
         logger.debug("with authorization code: {}", authCode);
 
     }
@@ -65,7 +64,7 @@ public class AuthzEndpointIT extends AbstractOAuthResourceIT {
         logger.debug("Redirect header '{}'", redirectHeader);
         final String authCode =
                 URI.create(redirectHeader).getQuery().split("&")[4].split("=")[1];
-        assertNotNull("Didn't find authorization code!", authCode);
+        Assert.assertNotNull("Didn't find authorization code!", authCode);
         logger.debug("with authorization code: {}", authCode);
         final HttpPost post =
                 new HttpPost(tokenEndpoint +
@@ -76,8 +75,9 @@ public class AuthzEndpointIT extends AbstractOAuthResourceIT {
         final HttpResponse tokenResponse = client.execute(post);
         logger.debug("Got a token response: \n{}", EntityUtils
                 .toString(tokenResponse.getEntity()));
-        assertEquals("Couldn't retrieve a token from token endpoint!", 200,
-                tokenResponse.getStatusLine().getStatusCode());
+        Assert.assertEquals("Couldn't retrieve a token from token endpoint!",
+                            200,
+                            tokenResponse.getStatusLine().getStatusCode());
     }
 
 }

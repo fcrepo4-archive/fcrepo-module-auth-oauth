@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fcrepo.auth.oauth.integration.api;
+package org.fcrepo.integration.auth.oauth.api;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -26,13 +26,13 @@ import java.util.Map;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
-import org.fcrepo.auth.oauth.integration.api.bind.ContextParam;
-import org.fcrepo.auth.oauth.integration.api.bind.Filter;
-import org.fcrepo.auth.oauth.integration.api.bind.FilterMapping;
-import org.fcrepo.auth.oauth.integration.api.bind.InitParam;
-import org.fcrepo.auth.oauth.integration.api.bind.Listener;
-import org.fcrepo.auth.oauth.integration.api.bind.Servlet;
-import org.fcrepo.auth.oauth.integration.api.bind.ServletMapping;
+import org.fcrepo.integration.auth.oauth.api.bind.FilterMapping;
+import org.fcrepo.integration.auth.oauth.api.bind.ServletMapping;
+import org.fcrepo.integration.auth.oauth.api.bind.ContextParam;
+import org.fcrepo.integration.auth.oauth.api.bind.Filter;
+import org.fcrepo.integration.auth.oauth.api.bind.InitParam;
+import org.fcrepo.integration.auth.oauth.api.bind.Listener;
+import org.fcrepo.integration.auth.oauth.api.bind.Servlet;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.servlet.FilterRegistration;
 import org.glassfish.grizzly.servlet.ServletRegistration;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fcrepo.auth.oauth.integration.api;
+package org.fcrepo.integration.auth.oauth.api;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -23,13 +23,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.fcrepo.auth.oauth.integration.api.bind.ContextParam;
-import org.fcrepo.auth.oauth.integration.api.bind.Displayable;
-import org.fcrepo.auth.oauth.integration.api.bind.Filter;
-import org.fcrepo.auth.oauth.integration.api.bind.FilterMapping;
-import org.fcrepo.auth.oauth.integration.api.bind.Listener;
-import org.fcrepo.auth.oauth.integration.api.bind.Servlet;
-import org.fcrepo.auth.oauth.integration.api.bind.ServletMapping;
+import org.fcrepo.integration.auth.oauth.api.bind.ContextParam;
+import org.fcrepo.integration.auth.oauth.api.bind.FilterMapping;
+import org.fcrepo.integration.auth.oauth.api.bind.ServletMapping;
+import org.fcrepo.integration.auth.oauth.api.bind.Displayable;
+import org.fcrepo.integration.auth.oauth.api.bind.Filter;
+import org.fcrepo.integration.auth.oauth.api.bind.Listener;
+import org.fcrepo.integration.auth.oauth.api.bind.Servlet;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;

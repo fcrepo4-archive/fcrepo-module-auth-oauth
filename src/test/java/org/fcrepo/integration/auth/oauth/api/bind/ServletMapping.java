@@ -13,17 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fcrepo.auth.oauth.integration.api.bind;
+package org.fcrepo.integration.auth.oauth.api.bind;
 
 import javax.xml.bind.annotation.XmlElement;
 
-public abstract class Displayable extends Describable {
+public class ServletMapping extends UrlMappable {
 
     @XmlElement(namespace = "http://java.sun.com/xml/ns/javaee",
-            name = "display-name")
-    String displayName;
+            name = "servlet-name")
+    String servletName;
 
-    public String displayName() {
-        return this.displayName;
+    public String servletName() {
+        return this.servletName;
     }
+
 }

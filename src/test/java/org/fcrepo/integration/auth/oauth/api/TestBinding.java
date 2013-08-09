@@ -13,21 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fcrepo.auth.oauth.integration.api;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+package org.fcrepo.integration.auth.oauth.api;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import org.fcrepo.webxml.WebAppConfig;
-import org.fcrepo.webxml.bind.ContextParam;
-import org.fcrepo.webxml.bind.FilterMapping;
-import org.fcrepo.webxml.bind.Listener;
-import org.fcrepo.webxml.bind.ServletMapping;
+import org.fcrepo.http.commons.webxml.WebAppConfig;
+import org.fcrepo.http.commons.webxml.bind.ContextParam;
+import org.fcrepo.http.commons.webxml.bind.FilterMapping;
+import org.fcrepo.http.commons.webxml.bind.Listener;
+import org.fcrepo.http.commons.webxml.bind.ServletMapping;
+import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,29 +41,29 @@ public class TestBinding {
         final WebAppConfig o =
                 (WebAppConfig) u.unmarshal(getClass().getResourceAsStream(
                         "/web.xml"));
-        assertEquals("Fedora-on-ModeShape", o.displayName());
-        assertTrue(o.contextParams().contains(
+        Assert.assertEquals("Fedora-on-ModeShape", o.displayName());
+        Assert.assertTrue(o.contextParams().contains(
                 new ContextParam("contextConfigLocation",
-                        "classpath:spring-test/rest.xml; "
-                                + "classpath:spring-test/repo.xml; "
-                                + "classpath:spring-test/security.xml")));
-        assertTrue(o
-                .listeners()
-                .contains(
-                        new Listener(null,
-                                "org.springframework.web.context.ContextLoaderListener")));
+                                 "classpath:spring-test/rest.xml; "
+                                         + "classpath:spring-test/repo.xml; "
+                                         + "classpath:spring-test/security.xml")));
+        Assert.assertTrue(o
+                                  .listeners()
+                                  .contains(
+                                          new Listener(null,
+                                                       "org.springframework.web.context.ContextLoaderListener")));
         final ServletMapping sm =
                 o.servletMappings("jersey-servlet").iterator().next();
-        assertNotNull(sm);
-        assertEquals("/*", sm.urlPattern());
+        Assert.assertNotNull(sm);
+        Assert.assertEquals("/*", sm.urlPattern());
 
         FilterMapping fm = o.filterMappings("TokenFilter").iterator().next();
-        assertNotNull(fm);
-        assertEquals("/token", fm.urlPattern());
+        Assert.assertNotNull(fm);
+        Assert.assertEquals("/token", fm.urlPattern());
 
         fm = o.filterMappings("OpFilter").iterator().next();
-        assertNotNull(fm);
-        assertEquals("/rest/objects/authenticated/*", fm.urlPattern());
+        Assert.assertNotNull(fm);
+        Assert.assertEquals("/rest/objects/authenticated/*", fm.urlPattern());
 
     }
 }
